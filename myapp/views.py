@@ -1,13 +1,16 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
-from django.forms import inlineformset_factory
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages 
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 from myapp.models import*
-from django.shortcuts import render
 from .forms import ContactForm
+from django.contrib import messages
   
 def index(request):
 	articles = Article.objects.all()
@@ -75,38 +78,80 @@ def my_account(request):
 	context = {}
 	return render(request, 'my-account.html', context)
 
-
-def RegisterView(request):
-	form = UserCreationForm()
-	if request.method =='POST':
-		form = UserCreationForm(data=request.POST)
-		if form.is_valid():
-			form.save()  
-			messages.success(request="Vous avez été bien connecté.  ")
-			return redirect ('register')
-		else:
-			messages.error(request, form.errors )
-	return render(request, 'register.html')
+def index1(request):
+	context = {}
+	return render(request, 'dashboard/dashboard.html', context)
 
 
-def login (request):
-	if request.method == "POST":
-		Username = request.POST['username']
-		password = request.POST['password']
-		user = authenticate(request,Username=Username,password=password)
-		if user is not None and user.is_active:
-			login(request,user)
-			messages.success(request, 'Bienvenue')
-			return redirect ('login ')
-		else:
-				messages.error(request,"erreur d'auyhentification",)
-	return render(request, 'login.html', )
+def charts(request):
+    return render(request, 'dashboard/charts.html')
 
 
-@login_required
-def deconnexion (request):
-	logout(request)
-	return redirect ('index4.html')
+def widgets(request):
+    return render(request, 'dashboard/widgets.html')
 
 
 
+
+def tables(request):
+    return render(request, "dashboard/tables.html")
+
+
+
+
+def grid(request):
+    return render(request, "dashboard/grid.html")
+
+
+
+
+def form_basic(request):
+    return render(request, "dashboard/form_basic.html")
+
+
+
+
+def form_wizard(request):
+    return render(request, "dashboard/form_wizard.html")
+
+
+
+
+def buttons(request):
+    return render(request, "dashboard/buttons.html")
+
+
+
+
+def icon_material(request):
+    return render(request, "dashboard/icon-material.html")
+
+
+
+
+def icon_fontawesome(request):
+    return render(request, "dashboard/icon-fontawesome.html")
+
+
+
+
+def elements(request):
+    return render(request, "dashboard/elements.html")
+
+
+
+
+def gallery(request):
+    return render(request, "dashboard/gallery.html")
+
+
+
+
+
+def invoice(request):
+    return render(request, "dashboard/invoice.html")
+
+
+
+def chat(request):
+    return render(request, "dashboard/chat.html")

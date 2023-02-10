@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -158,3 +159,4 @@ STATICFILES_DIRS = [
      os.path.join(BASE_DIR, "static"),
 ]
 MEDIA_URL = '/images/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

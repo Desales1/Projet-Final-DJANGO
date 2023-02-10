@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views 
+from django.contrib.auth import views as auth_views
 
 app_name="myapp"
 
@@ -17,11 +18,19 @@ path('blog_list', views.blog_list, name='blog_list'),
 path('blog_details', views.blog_details, name='blog_details'),
 path('order_confirmation', views.contact_us, name='order-confirmation'),
 path('product_details', views.product_details, name='product_details'),
-path('Register', views.RegisterView, name='register'),
- path('login', views.login, name='login'),
-path('logout', views.deconnexion, name='deconnexion'),
-
-
-
-    
+path("dashboard/", views.index1, name="dashboard"),
+path("charts/", views.charts, name="charts"),
+path("widgets/", views.widgets, name="widgets"),
+path("tables/", views.tables, name="tables"),
+path("grid/", views.grid, name="grid"),
+path("form-basic/", views.form_basic, name="form-basic"),
+path("form-wizard/", views.form_wizard, name="form-wizard"),
+path("buttons/", views.buttons, name="buttons"),
+path("icon-material/", views.icon_material, name="icon-material"),
+path("icon-fontawesome/", views.icon_fontawesome, name="icon-fontawesome"),
+path("elements/", views.elements, name="elements"),
+path("gallery/", views.gallery, name="gallery"),
+path("invoice/", views.invoice, name="invoice"),
+path("chat/", views.chat, name="chat"),
 ]
+
